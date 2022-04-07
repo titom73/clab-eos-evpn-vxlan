@@ -40,14 +40,14 @@ $ sudo containerlab destroy --topo topology.yml
 
 | Hostname | Managemnt Interface | IP Address      |
 | -------- | ------------------- | --------------  |
-| Spine1   | Managmenent0        | 192.168.0.10/24 |
-| Spine2   | Managmenent0        | 192.168.0.11/24 |
-| Leaf1    | Managmenent0        | 192.168.0.12/24 |
-| Leaf2    | Managmenent0        | 192.168.0.13/24 |
-| Leaf3    | Managmenent0        | 192.168.0.14/24 |
-| Leaf4    | Managmenent0        | 192.168.0.15/24 |
-| Host1    | Managmenent0        | 192.168.0.16/24 |
-| Host2    | Managmenent0        | 192.168.0.17/24 |
+| Spine1   | Management0        | 192.168.0.10/24 |
+| Spine2   | Management0        | 192.168.0.11/24 |
+| Leaf1    | Management0        | 192.168.0.12/24 |
+| Leaf2    | Management0        | 192.168.0.13/24 |
+| Leaf3    | Management0        | 192.168.0.14/24 |
+| Leaf4    | Management0        | 192.168.0.15/24 |
+| Host1    | Management0        | 192.168.0.16/24 |
+| Host2    | Management0        | 192.168.0.17/24 |
 
 ## Startup configuration
 
