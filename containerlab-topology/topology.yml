@@ -1,0 +1,86 @@
+name: atd
+
+topology:
+  kinds:
+    ceos:
+      image: arista/ceos:4.27.3F
+  nodes:
+    spine1:
+      kind: ceos
+      mgmt_ipv4: 192.168.0.10
+      startup-config: configs/spine1.cfg
+      env:
+        TMODE: lacp
+    spine2:
+      kind: ceos
+      mgmt_ipv4: 192.168.0.11
+      startup-config: configs/spine2.cfg
+      env:
+        TMODE: lacp
+    leaf1:
+      kind: ceos
+      mgmt_ipv4: 192.168.0.12
+      startup-config: configs/leaf1.cfg
+      env:
+        TMODE: lacp
+    leaf2:
+      kind: ceos
+      mgmt_ipv4: 192.168.0.13
+      startup-config: configs/leaf2.cfg
+      env:
+        TMODE: lacp
+    leaf3:
+      kind: ceos
+      mgmt_ipv4: 192.168.0.14
+      startup-config: configs/leaf3.cfg
+      env:
+        TMODE: lacp
+    leaf4:
+      kind: ceos
+      mgmt_ipv4: 192.168.0.15
+      startup-config: configs/leaf4.cfg
+      env:
+        TMODE: lacp
+    host1:
+      kind: ceos
+      mgmt_ipv4: 192.168.0.16
+      startup-config: configs/host1.cfg
+      env:
+        TMODE: lacp
+    Host2:
+      kind: ceos
+      mgmt_ipv4: 192.168.0.17
+      startup-config: configs/host2.cfg
+      env:
+        TMODE: lacp
+
+  links:
+    # Sines
+    - endpoints: ["leaf1:eth1", "spine1:eth1"]
+    - endpoints: ["leaf2:eth1", "spine1:eth2"]
+    - endpoints: ["leaf3:eth1", "spine1:eth3"]
+    - endpoints: ["leaf4:eth1", "spine1:eth4"]
+    - endpoints: ["leaf1:eth2", "spine2:eth1"]
+    - endpoints: ["leaf2:eth2", "spine2:eth2"]
+    - endpoints: ["leaf3:eth2", "spine2:eth3"]
+    - endpoints: ["leaf4:eth2", "spine2:eth4"]
+    # MLAG Links
+    - endpoints: ["leaf1:eth3", "leaf2:eth3"]
+    - endpoints: ["leaf1:eth4", "leaf2:eth4"]
+    - endpoints: ["leaf3:eth3", "leaf4:eth3"]
+    - endpoints: ["leaf3:eth4", "leaf4:eth4"]
+    # Host1 Links
+    - endpoints: ["leaf1:eth4", "host1:eth1"]
+    - endpoints: ["leaf1:eth5", "host1:eth3"]
+    - endpoints: ["leaf2:eth4", "host1:eth2"]
+    - endpoints: ["leaf2:eth5", "host1:eth4"]
+    # Host2 Links
+    - endpoints: ["leaf3:eth4", "host2:eth1"]
+    - endpoints: ["leaf3:eth5", "host2:eth3"]
+    - endpoints: ["leaf4:eth4", "host2:eth2"]
+    - endpoints: ["leaf4:eth5", "host2:eth4"]
+
+mgmt:
+  network: atd_mgt
+  ipv4_subnet: 192.168.0.0/24
+  ipv6_subnet: 2001:192:168:0::/80
