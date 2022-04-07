@@ -69,7 +69,7 @@ topology:
     - endpoints: ["leaf1:eth6", "leaf2:eth6"]
     - endpoints: ["leaf3:eth1", "leaf4:eth1"]
     - endpoints: ["leaf3:eth6", "leaf4:eth6"]
-    - endpoints: ["spine1:eth1", ":eth1"]
+    - endpoints: ["spine1:eth1", "spine2:eth1"]
     - endpoints: ["spine1:eth6", "spine2:eth6"]
     # Host1 Links
     - endpoints: ["leaf1:eth4", "host1:eth1"]
