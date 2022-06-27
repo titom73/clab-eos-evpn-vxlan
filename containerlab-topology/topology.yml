@@ -54,6 +54,27 @@ topology:
       env:
         TMODE: lacp
 
+    # --------------------------------------- #
+    # Graphite Node                           #
+    # Provides Topology Graphing and the      #
+    # ability to connect to nodes in the      #
+    # topology via a web/ssh session          #
+    # --------------------------------------- #
+    graphite:
+      kind: linux
+      image: netreplica/graphite
+      env:
+        GRAPHITE_DEFAULT_TYPE: clab
+        GRAPHITE_DEFAULT_TOPO: atd
+      binds:
+        - .:/htdocs/clab    # New path required for latest version
+      ports:
+        - 80:80
+      exec:
+        - sh -c 'graphite_motd.sh 80'
+      labels:
+        graph-hide: yes
+
   links:
     # Spines
     - endpoints: ["leaf1:eth2", "spine1:eth2"]
