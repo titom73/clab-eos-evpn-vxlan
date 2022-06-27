@@ -10,4 +10,5 @@ module "webserver" {
     network_subnet_cidr     = var.network_subnet_cidr
     public_key_path         = var.public_key_path
     private_key_path        = var.private_key_path
+    username                = var.username
 }

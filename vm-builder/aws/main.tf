@@ -7,4 +7,5 @@ module "webserver" {
     availability_zone   = var.availability_zone
     instance_type       = var.instance_type
     vm_name             = var.vm_name
+    username                = var.username
 }

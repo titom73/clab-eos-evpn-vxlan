@@ -27,3 +27,9 @@ variable "private_key_path" {
   type        = string
   description = "Path to private key to deploy in EC2 instance"
 }
+
+variable "username" {
+  default     = "ubuntu"
+  type        = string
+  description = "VM user"
+}
