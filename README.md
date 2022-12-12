@@ -1,5 +1,7 @@
 # Arista ATD Emulation on Containerlab
 
+An AVD builder is available in branch [`avd-builder`](https://github.com/titom73/atd-containerlab/tree/avd-builder)
+
 ## Topology
 
 ![](diagram.jpg)
@@ -40,14 +42,14 @@ $ sudo containerlab destroy --topo topology.yml
 
 | Hostname | Managemnt Interface | IP Address      |
 | -------- | ------------------- | --------------  |
-| Spine1   | Management0        | 192.168.0.10/24 |
-| Spine2   | Management0        | 192.168.0.11/24 |
-| Leaf1    | Management0        | 192.168.0.12/24 |
-| Leaf2    | Management0        | 192.168.0.13/24 |
-| Leaf3    | Management0        | 192.168.0.14/24 |
-| Leaf4    | Management0        | 192.168.0.15/24 |
-| Host1    | Management0        | 192.168.0.16/24 |
-| Host2    | Management0        | 192.168.0.17/24 |
+| Spine1   | Management0         | 192.168.0.10/24 |
+| Spine2   | Management0         | 192.168.0.11/24 |
+| Leaf1    | Management0         | 192.168.0.12/24 |
+| Leaf2    | Management0         | 192.168.0.13/24 |
+| Leaf3    | Management0         | 192.168.0.14/24 |
+| Leaf4    | Management0         | 192.168.0.15/24 |
+| Host1    | Management0         | 192.168.0.16/24 |
+| Host2    | Management0         | 192.168.0.17/24 |
 
 ## Startup configuration
 
