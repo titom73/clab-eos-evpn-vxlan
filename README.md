@@ -30,24 +30,46 @@ $ cd containerlab-topology
 $ sudo containerlab destroy --topo topology.yml
 ```
 
+## Configuration Management
+
+__Inventory:__
+
+  - Inventory file: [atd-inventory/inventory.yml](atd-inventory/inventory.yml)
+  - AVD variables: [atd-inventory/group_vars](atd-inventory/group_vars)
+
+__Commands__
+
+- Build and deploy
+
+```bash
+ansible-playbook playbooks/atd-fabric-deploy.yml
+```
+
+- Build only
+
+```bash
+ansible-playbook playbooks/atd-fabric-deploy.yml --tags build
+```
+
 ## Authentication
 
 - Username: __admin__ (password: _none_)
 - Username: __ansible__ (password: `ansible`)
+- Username: __arista__ (password: `ansible`)
 - Username: __cvpadmin__ (password: `ansible`)
 
 ## Management IPs
 
 | Hostname | Managemnt Interface | IP Address      |
 | -------- | ------------------- | --------------  |
-| Spine1   | Management0        | 192.168.0.10/24 |
-| Spine2   | Management0        | 192.168.0.11/24 |
-| Leaf1    | Management0        | 192.168.0.12/24 |
-| Leaf2    | Management0        | 192.168.0.13/24 |
-| Leaf3    | Management0        | 192.168.0.14/24 |
-| Leaf4    | Management0        | 192.168.0.15/24 |
-| Host1    | Management0        | 192.168.0.16/24 |
-| Host2    | Management0        | 192.168.0.17/24 |
+| Spine1   | Management0         | 192.168.0.10/24 |
+| Spine2   | Management0         | 192.168.0.11/24 |
+| Leaf1    | Management0         | 192.168.0.12/24 |
+| Leaf2    | Management0         | 192.168.0.13/24 |
+| Leaf3    | Management0         | 192.168.0.14/24 |
+| Leaf4    | Management0         | 192.168.0.15/24 |
+| Host1    | Management0         | 192.168.0.16/24 |
+| Host2    | Management0         | 192.168.0.17/24 |
 
 ## Startup configuration
 
