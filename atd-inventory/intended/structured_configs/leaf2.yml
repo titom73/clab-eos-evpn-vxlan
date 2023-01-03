@@ -227,7 +227,7 @@ port_channel_interfaces:
     description: host1_PortChanne1
     type: switched
     shutdown: false
-    mode: access
+    mode: trunk
     vlans: 110
     mlag: 4
 ethernet_interfaces:
@@ -266,7 +266,7 @@ ethernet_interfaces:
     description: host1_Eth3
     type: switched
     shutdown: false
-    mode: access
+    mode: trunk
     vlans: 110
     channel_group:
       id: 4
@@ -278,7 +278,7 @@ ethernet_interfaces:
     description: host1_Eth4
     type: switched
     shutdown: false
-    mode: access
+    mode: trunk
     vlans: 110
     channel_group:
       id: 4

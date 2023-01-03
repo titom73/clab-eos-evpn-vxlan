@@ -1,7 +1,7 @@
 ---
 port_profiles:
   TENANT_A:
-    mode: access
+    mode: trunk
     vlans: "110"
 
 servers:
