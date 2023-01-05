@@ -1,6 +1,9 @@
 # Arista ATD Emulation on Containerlab
 
-An AVD builder is available in branch [`avd-builder`](https://github.com/titom73/atd-containerlab/tree/avd-builder)
+Lab versions:
+
+- Configuration with ansible management via eAPI or CVP: [`main`](https://github.com/titom73/atd-containerlab/tree/main) or [`avd-builder`](https://github.com/titom73/atd-containerlab/tree/avd-builder) branches
+- Configuration managed manually without automation: [`no-automation`](https://github.com/titom73/atd-containerlab/tree/no-automation) branch
 
 ## Topology
 
@@ -32,11 +35,47 @@ $ cd containerlab-topology
 $ sudo containerlab destroy --topo topology.yml
 ```
 
+## Configuration Management
+
+__Inventory:__
+
+  - Inventory file: [atd-inventory/inventory.yml](atd-inventory/inventory.yml)
+  - AVD variables: [atd-inventory/group_vars](atd-inventory/group_vars)
+
+__Commands__
+
+- Build and deploy
+
+```bash
+ansible-playbook playbooks/atd-fabric-deploy.yml
+```
+
+- Build only
+
+```bash
+ansible-playbook playbooks/atd-fabric-deploy.yml --tags build
+```
+
+- Build & deploy via eAPI
+
+```bash
+ansible-playbook playbooks/atd-fabric-deploy.yml --tags build,deploy_eapi
+```
+
+- Build & deploy via CVP
+
+> Be sure to update CVP information in your inventory file.
+
+```bash
+ansible-playbook playbooks/atd-fabric-deploy.yml --tags build,deploy_cvp
+```
+
 ## Authentication
 
 - Username: __admin__ (password: _none_)
 - Username: __ansible__ (password: `ansible`)
 - Username: __cvpadmin__ (password: `ansible`)
+- Username: __arista__ (password: `arista`)
 
 ## Management IPs
 
