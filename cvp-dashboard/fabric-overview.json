@@ -3,7 +3,7 @@
         {
             "key": "c0b21023-b950-4eeb-a181-ff2a6f16578d",
             "createdAt": [
-                27371287,
+                35045710,
                 1558
             ],
             "createdBy": "tom",
@@ -21,7 +21,7 @@
                     "name": "BGP Established Peers (Default VRF) for leaf devices",
                     "position": {
                         "x": 0,
-                        "y": 0
+                        "y": 9
                     },
                     "dimensions": {
                         "width": 6,
@@ -46,7 +46,7 @@
                     "name": "BGP Established Peers (Default VRF) for spine devices",
                     "position": {
                         "x": 6,
-                        "y": 0
+                        "y": 9
                     },
                     "dimensions": {
                         "width": 6,
@@ -71,7 +71,7 @@
                     "name": "IPv4 BGP Learned Routes (All VRFs) for leaf devices",
                     "position": {
                         "x": 0,
-                        "y": 8
+                        "y": 17
                     },
                     "dimensions": {
                         "width": 6,
@@ -100,7 +100,7 @@
                     },
                     "dimensions": {
                         "width": 12,
-                        "height": 8
+                        "height": 9
                     },
                     "type": "metrics-widget-table",
                     "inputs": {
@@ -128,7 +128,7 @@
                     "name": "Mac Address Learning",
                     "position": {
                         "x": 12,
-                        "y": 8
+                        "y": 9
                     },
                     "dimensions": {
                         "width": 12,
@@ -159,7 +159,7 @@
                     "name": "Remote MACs learning",
                     "position": {
                         "x": 6,
-                        "y": 8
+                        "y": 17
                     },
                     "dimensions": {
                         "width": 6,
@@ -178,9 +178,60 @@
                         "tags": "Container:ATD_LEAFS "
                     },
                     "location": "main"
+                },
+                {
+                    "id": "91646aa3-98c4-4240-9d60-ff01e95c2eee",
+                    "name": "",
+                    "position": {
+                        "x": 12,
+                        "y": 17
+                    },
+                    "dimensions": {
+                        "width": 12,
+                        "height": 8
+                    },
+                    "type": "metrics-widget-aggregate",
+                    "inputs": {
+                        "components": [],
+                        "isTokenSearchEnabled": true,
+                        "metricKeys": [
+                            "DEVICE_EOS_VERSION"
+                        ],
+                        "metricSource": "devices",
+                        "selectedCustomTags": [],
+                        "tags": "eos:* ",
+                        "limits": {},
+                        "viewType": "metric"
+                    },
+                    "location": "main"
+                },
+                {
+                    "id": "b9bbfc5a-5022-43ed-a200-7eebba88b9af",
+                    "name": "",
+                    "position": {
+                        "x": 0,
+                        "y": 0
+                    },
+                    "dimensions": {
+                        "width": 12,
+                        "height": 9
+                    },
+                    "type": "topology-widget",
+                    "inputs": {
+                        "overlay": "utilization",
+                        "selectedCustomTags": [],
+                        "showActiveEvents": true,
+                        "showContainerTypes": false,
+                        "showLegend": true,
+                        "showManagement": false,
+                        "showVxlanTunnels": false,
+                        "tags": "Container:ATD_LAB ",
+                        "useDeviceImages": true
+                    },
+                    "location": "main"
                 }
             ],
-            "lastUpdated": 1672917632714,
+            "lastUpdated": 1673262234464,
             "lastUpdatedBy": "tom"
         }
     ]
