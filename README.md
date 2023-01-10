@@ -3,7 +3,7 @@
 Lab versions:
 
 - Configuration with ansible management via eAPI or CVP: [`main`](https://github.com/titom73/atd-containerlab/tree/main) or [`avd-builder`](https://github.com/titom73/atd-containerlab/tree/avd-builder) branches
-- Configuration managed manually without automation: [`no-automation`](https://github.com/titom73/atd-containerlab/tree/no-automation) branch
+- Configuration managed manually without automation: [`no-ansible`](https://github.com/titom73/atd-containerlab/tree/no-ansible) branch
 
 ## Topology
 

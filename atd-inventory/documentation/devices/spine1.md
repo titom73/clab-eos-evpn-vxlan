@@ -37,6 +37,7 @@
   - [VRF Instances Summary](#vrf-instances-summary)
   - [VRF Instances Device Configuration](#vrf-instances-device-configuration)
 - [Quality Of Service](#quality-of-service)
+- [EOS CLI](#eos-cli)
 
 # Management
 
@@ -527,3 +528,12 @@ route-map RM-CONN-2-BGP permit 10
 ```
 
 # Quality Of Service
+
+# EOS CLI
+
+```eos
+!
+interface Management0
+   no lldp transmit
+
+```
