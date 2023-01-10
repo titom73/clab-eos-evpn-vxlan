@@ -51,6 +51,7 @@
   - [Virtual Source NAT Summary](#virtual-source-nat-summary)
   - [Virtual Source NAT Configuration](#virtual-source-nat-configuration)
 - [Quality Of Service](#quality-of-service)
+- [EOS CLI](#eos-cli)
 
 # Management
 
@@ -846,3 +847,12 @@ ip address virtual source-nat vrf Tenant_A_OP_Zone address 10.255.1.6
 ```
 
 # Quality Of Service
+
+# EOS CLI
+
+```eos
+!
+interface Management0
+   no lldp transmit
+
+```

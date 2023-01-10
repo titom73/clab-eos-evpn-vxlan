@@ -90,7 +90,7 @@ CVP_CONFIGLETS:
     \ export evpn 10:10\n      router-id 192.0.255.3\n      neighbor 10.255.251.1\
     \ peer group MLAG-IPv4-UNDERLAY-PEER\n      redistribute connected\n!\nmanagement\
     \ api http-commands\n   protocol https\n   no shutdown\n   !\n   vrf default\n\
-    \      no shutdown\n!\nend\n"
+    \      no shutdown\n!\ninterface Management0\n   no lldp transmit\n\n!\nend\n"
   AVD_ATD_leaf2: "!RANCID-CONTENT-TYPE: arista\n!\ndaemon TerminAttr\n   exec /usr/bin/TerminAttr\
     \ -cvaddr=10.73.1.238:9910 -cvauth=token,/tmp/token -cvvrf=default -cvsourceip=192.168.0.13\
     \ -cvgnmi -smashexcludes=ale,flexCounter,hardware,kni,pulse,strata -ingestexclude=/Sysdb/cell/1/agent,/Sysdb/cell/2/agent\
@@ -182,7 +182,7 @@ CVP_CONFIGLETS:
     \ export evpn 10:10\n      router-id 192.0.255.4\n      neighbor 10.255.251.0\
     \ peer group MLAG-IPv4-UNDERLAY-PEER\n      redistribute connected\n!\nmanagement\
     \ api http-commands\n   protocol https\n   no shutdown\n   !\n   vrf default\n\
-    \      no shutdown\n!\nend\n"
+    \      no shutdown\n!\ninterface Management0\n   no lldp transmit\n\n!\nend\n"
   AVD_ATD_leaf3: "!RANCID-CONTENT-TYPE: arista\n!\ndaemon TerminAttr\n   exec /usr/bin/TerminAttr\
     \ -cvaddr=10.73.1.238:9910 -cvauth=token,/tmp/token -cvvrf=default -cvsourceip=192.168.0.14\
     \ -cvgnmi -smashexcludes=ale,flexCounter,hardware,kni,pulse,strata -ingestexclude=/Sysdb/cell/1/agent,/Sysdb/cell/2/agent\
@@ -274,7 +274,7 @@ CVP_CONFIGLETS:
     \ export evpn 10:10\n      router-id 192.0.255.5\n      neighbor 10.255.251.5\
     \ peer group MLAG-IPv4-UNDERLAY-PEER\n      redistribute connected\n!\nmanagement\
     \ api http-commands\n   protocol https\n   no shutdown\n   !\n   vrf default\n\
-    \      no shutdown\n!\nend\n"
+    \      no shutdown\n!\ninterface Management0\n   no lldp transmit\n\n!\nend\n"
   AVD_ATD_leaf4: "!RANCID-CONTENT-TYPE: arista\n!\ndaemon TerminAttr\n   exec /usr/bin/TerminAttr\
     \ -cvaddr=10.73.1.238:9910 -cvauth=token,/tmp/token -cvvrf=default -cvsourceip=192.168.0.15\
     \ -cvgnmi -smashexcludes=ale,flexCounter,hardware,kni,pulse,strata -ingestexclude=/Sysdb/cell/1/agent,/Sysdb/cell/2/agent\
@@ -366,7 +366,7 @@ CVP_CONFIGLETS:
     \ export evpn 10:10\n      router-id 192.0.255.6\n      neighbor 10.255.251.4\
     \ peer group MLAG-IPv4-UNDERLAY-PEER\n      redistribute connected\n!\nmanagement\
     \ api http-commands\n   protocol https\n   no shutdown\n   !\n   vrf default\n\
-    \      no shutdown\n!\nend\n"
+    \      no shutdown\n!\ninterface Management0\n   no lldp transmit\n\n!\nend\n"
   AVD_ATD_spine1: "!RANCID-CONTENT-TYPE: arista\n!\ndaemon TerminAttr\n   exec /usr/bin/TerminAttr\
     \ -cvaddr=10.73.1.238:9910 -cvauth=token,/tmp/token -cvvrf=default -cvsourceip=192.168.0.10\
     \ -cvgnmi -smashexcludes=ale,flexCounter,hardware,kni,pulse,strata -ingestexclude=/Sysdb/cell/1/agent,/Sysdb/cell/2/agent\
@@ -421,7 +421,8 @@ CVP_CONFIGLETS:
     \ evpn\n      neighbor EVPN-OVERLAY-PEERS activate\n   !\n   address-family ipv4\n\
     \      no neighbor EVPN-OVERLAY-PEERS activate\n      neighbor IPv4-UNDERLAY-PEERS\
     \ activate\n!\nmanagement api http-commands\n   protocol https\n   no shutdown\n\
-    \   !\n   vrf default\n      no shutdown\n!\nend\n"
+    \   !\n   vrf default\n      no shutdown\n!\ninterface Management0\n   no lldp\
+    \ transmit\n\n!\nend\n"
   AVD_ATD_spine2: "!RANCID-CONTENT-TYPE: arista\n!\ndaemon TerminAttr\n   exec /usr/bin/TerminAttr\
     \ -cvaddr=10.73.1.238:9910 -cvauth=token,/tmp/token -cvvrf=default -cvsourceip=192.168.0.11\
     \ -cvgnmi -smashexcludes=ale,flexCounter,hardware,kni,pulse,strata -ingestexclude=/Sysdb/cell/1/agent,/Sysdb/cell/2/agent\
@@ -476,7 +477,8 @@ CVP_CONFIGLETS:
     \ evpn\n      neighbor EVPN-OVERLAY-PEERS activate\n   !\n   address-family ipv4\n\
     \      no neighbor EVPN-OVERLAY-PEERS activate\n      neighbor IPv4-UNDERLAY-PEERS\
     \ activate\n!\nmanagement api http-commands\n   protocol https\n   no shutdown\n\
-    \   !\n   vrf default\n      no shutdown\n!\nend\n"
+    \   !\n   vrf default\n      no shutdown\n!\ninterface Management0\n   no lldp\
+    \ transmit\n\n!\nend\n"
 CVP_TOPOLOGY:
   ATD_FABRIC:
     parent_container: ATD_LAB

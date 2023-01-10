@@ -157,6 +157,7 @@ management_api_http:
   enable_vrfs:
     default: {}
   enable_https: true
+eos_cli: "interface Management0\n   no lldp transmit\n"
 vlans:
   4093:
     tenant: system

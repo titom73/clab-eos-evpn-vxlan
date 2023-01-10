@@ -17,12 +17,12 @@
 
 | POD | Type | Node | Management IP | Platform | Provisioned in CloudVision |
 | --- | ---- | ---- | ------------- | -------- | -------------------------- |
-| ATD_FABRIC | l3leaf | leaf1 | 192.168.0.12/24 | vEOS-LAB | Provisioned |
-| ATD_FABRIC | l3leaf | leaf2 | 192.168.0.13/24 | vEOS-LAB | Provisioned |
-| ATD_FABRIC | l3leaf | leaf3 | 192.168.0.14/24 | vEOS-LAB | Provisioned |
-| ATD_FABRIC | l3leaf | leaf4 | 192.168.0.15/24 | vEOS-LAB | Provisioned |
-| ATD_FABRIC | spine | spine1 | 192.168.0.10/24 | vEOS-LAB | Provisioned |
-| ATD_FABRIC | spine | spine2 | 192.168.0.11/24 | vEOS-LAB | Provisioned |
+| ATD_FABRIC | l3leaf | leaf1 | 192.168.0.12/24 | ceos | Provisioned |
+| ATD_FABRIC | l3leaf | leaf2 | 192.168.0.13/24 | ceos | Provisioned |
+| ATD_FABRIC | l3leaf | leaf3 | 192.168.0.14/24 | ceos | Provisioned |
+| ATD_FABRIC | l3leaf | leaf4 | 192.168.0.15/24 | ceos | Provisioned |
+| ATD_FABRIC | spine | spine1 | 192.168.0.10/24 | ceos | Provisioned |
+| ATD_FABRIC | spine | spine2 | 192.168.0.11/24 | ceos | Provisioned |
 
 > Provision status is based on Ansible inventory declaration and do not represent real status from CloudVision.
 
