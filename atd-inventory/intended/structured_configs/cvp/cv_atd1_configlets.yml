@@ -79,18 +79,18 @@ CVP_CONFIGLETS:
     \ 65001\n   neighbor 192.0.255.1 description spine1\n   neighbor 192.0.255.2 peer\
     \ group EVPN-OVERLAY-PEERS\n   neighbor 192.0.255.2 remote-as 65001\n   neighbor\
     \ 192.0.255.2 description spine2\n   redistribute connected route-map RM-CONN-2-BGP\n\
-    \   !\n   vlan-aware-bundle Tenant_A_OP_Zone\n      rd 192.0.255.3:10\n      route-target\
-    \ both 10:10\n      redistribute learned\n      vlan 110\n   !\n   vlan-aware-bundle\
-    \ Tenant_A_VMOTION\n      rd 192.0.255.3:55160\n      route-target both 55160:55160\n\
-    \      redistribute learned\n      vlan 160\n   !\n   address-family evpn\n  \
-    \    neighbor EVPN-OVERLAY-PEERS activate\n   !\n   address-family ipv4\n    \
-    \  no neighbor EVPN-OVERLAY-PEERS activate\n      neighbor IPv4-UNDERLAY-PEERS\
+    \   !\n   vlan 110\n      rd 192.0.255.3:10110\n      route-target both 10110:10110\n\
+    \      redistribute learned\n   !\n   vlan 160\n      rd 192.0.255.3:55160\n \
+    \     route-target both 55160:55160\n      redistribute learned\n   !\n   address-family\
+    \ evpn\n      neighbor EVPN-OVERLAY-PEERS activate\n   !\n   address-family ipv4\n\
+    \      no neighbor EVPN-OVERLAY-PEERS activate\n      neighbor IPv4-UNDERLAY-PEERS\
     \ activate\n      neighbor MLAG-IPv4-UNDERLAY-PEER activate\n   !\n   vrf Tenant_A_OP_Zone\n\
     \      rd 192.0.255.3:10\n      route-target import evpn 10:10\n      route-target\
     \ export evpn 10:10\n      router-id 192.0.255.3\n      neighbor 10.255.251.1\
     \ peer group MLAG-IPv4-UNDERLAY-PEER\n      redistribute connected\n!\nmanagement\
     \ api http-commands\n   protocol https\n   no shutdown\n   !\n   vrf default\n\
-    \      no shutdown\n!\ninterface Management0\n   no lldp transmit\n\n!\nend\n"
+    \      no shutdown\n!\nmanagement ssh\n   idle-timeout 360\n   no shutdown\n \
+    \  log-level DEBUG\n!\ninterface Management0\n   no lldp transmit\n\n!\nend\n"
   AVD_ATD_leaf2: "!RANCID-CONTENT-TYPE: arista\n!\ndaemon TerminAttr\n   exec /usr/bin/TerminAttr\
     \ -cvaddr=10.73.1.238:9910 -cvauth=token,/tmp/token -cvvrf=default -cvsourceip=192.168.0.13\
     \ -cvgnmi -smashexcludes=ale,flexCounter,hardware,kni,pulse,strata -ingestexclude=/Sysdb/cell/1/agent,/Sysdb/cell/2/agent\
@@ -171,18 +171,18 @@ CVP_CONFIGLETS:
     \ 65001\n   neighbor 192.0.255.1 description spine1\n   neighbor 192.0.255.2 peer\
     \ group EVPN-OVERLAY-PEERS\n   neighbor 192.0.255.2 remote-as 65001\n   neighbor\
     \ 192.0.255.2 description spine2\n   redistribute connected route-map RM-CONN-2-BGP\n\
-    \   !\n   vlan-aware-bundle Tenant_A_OP_Zone\n      rd 192.0.255.4:10\n      route-target\
-    \ both 10:10\n      redistribute learned\n      vlan 110\n   !\n   vlan-aware-bundle\
-    \ Tenant_A_VMOTION\n      rd 192.0.255.4:55160\n      route-target both 55160:55160\n\
-    \      redistribute learned\n      vlan 160\n   !\n   address-family evpn\n  \
-    \    neighbor EVPN-OVERLAY-PEERS activate\n   !\n   address-family ipv4\n    \
-    \  no neighbor EVPN-OVERLAY-PEERS activate\n      neighbor IPv4-UNDERLAY-PEERS\
+    \   !\n   vlan 110\n      rd 192.0.255.4:10110\n      route-target both 10110:10110\n\
+    \      redistribute learned\n   !\n   vlan 160\n      rd 192.0.255.4:55160\n \
+    \     route-target both 55160:55160\n      redistribute learned\n   !\n   address-family\
+    \ evpn\n      neighbor EVPN-OVERLAY-PEERS activate\n   !\n   address-family ipv4\n\
+    \      no neighbor EVPN-OVERLAY-PEERS activate\n      neighbor IPv4-UNDERLAY-PEERS\
     \ activate\n      neighbor MLAG-IPv4-UNDERLAY-PEER activate\n   !\n   vrf Tenant_A_OP_Zone\n\
     \      rd 192.0.255.4:10\n      route-target import evpn 10:10\n      route-target\
     \ export evpn 10:10\n      router-id 192.0.255.4\n      neighbor 10.255.251.0\
     \ peer group MLAG-IPv4-UNDERLAY-PEER\n      redistribute connected\n!\nmanagement\
     \ api http-commands\n   protocol https\n   no shutdown\n   !\n   vrf default\n\
-    \      no shutdown\n!\ninterface Management0\n   no lldp transmit\n\n!\nend\n"
+    \      no shutdown\n!\nmanagement ssh\n   idle-timeout 360\n   no shutdown\n \
+    \  log-level DEBUG\n!\ninterface Management0\n   no lldp transmit\n\n!\nend\n"
   AVD_ATD_leaf3: "!RANCID-CONTENT-TYPE: arista\n!\ndaemon TerminAttr\n   exec /usr/bin/TerminAttr\
     \ -cvaddr=10.73.1.238:9910 -cvauth=token,/tmp/token -cvvrf=default -cvsourceip=192.168.0.14\
     \ -cvgnmi -smashexcludes=ale,flexCounter,hardware,kni,pulse,strata -ingestexclude=/Sysdb/cell/1/agent,/Sysdb/cell/2/agent\
@@ -263,18 +263,18 @@ CVP_CONFIGLETS:
     \ remote-as 65001\n   neighbor 192.0.255.1 description spine1\n   neighbor 192.0.255.2\
     \ peer group EVPN-OVERLAY-PEERS\n   neighbor 192.0.255.2 remote-as 65001\n   neighbor\
     \ 192.0.255.2 description spine2\n   redistribute connected route-map RM-CONN-2-BGP\n\
-    \   !\n   vlan-aware-bundle Tenant_A_OP_Zone\n      rd 192.0.255.5:10\n      route-target\
-    \ both 10:10\n      redistribute learned\n      vlan 110\n   !\n   vlan-aware-bundle\
-    \ Tenant_A_VMOTION\n      rd 192.0.255.5:55160\n      route-target both 55160:55160\n\
-    \      redistribute learned\n      vlan 160\n   !\n   address-family evpn\n  \
-    \    neighbor EVPN-OVERLAY-PEERS activate\n   !\n   address-family ipv4\n    \
-    \  no neighbor EVPN-OVERLAY-PEERS activate\n      neighbor IPv4-UNDERLAY-PEERS\
+    \   !\n   vlan 110\n      rd 192.0.255.5:10110\n      route-target both 10110:10110\n\
+    \      redistribute learned\n   !\n   vlan 160\n      rd 192.0.255.5:55160\n \
+    \     route-target both 55160:55160\n      redistribute learned\n   !\n   address-family\
+    \ evpn\n      neighbor EVPN-OVERLAY-PEERS activate\n   !\n   address-family ipv4\n\
+    \      no neighbor EVPN-OVERLAY-PEERS activate\n      neighbor IPv4-UNDERLAY-PEERS\
     \ activate\n      neighbor MLAG-IPv4-UNDERLAY-PEER activate\n   !\n   vrf Tenant_A_OP_Zone\n\
     \      rd 192.0.255.5:10\n      route-target import evpn 10:10\n      route-target\
     \ export evpn 10:10\n      router-id 192.0.255.5\n      neighbor 10.255.251.5\
     \ peer group MLAG-IPv4-UNDERLAY-PEER\n      redistribute connected\n!\nmanagement\
     \ api http-commands\n   protocol https\n   no shutdown\n   !\n   vrf default\n\
-    \      no shutdown\n!\ninterface Management0\n   no lldp transmit\n\n!\nend\n"
+    \      no shutdown\n!\nmanagement ssh\n   idle-timeout 360\n   no shutdown\n \
+    \  log-level DEBUG\n!\ninterface Management0\n   no lldp transmit\n\n!\nend\n"
   AVD_ATD_leaf4: "!RANCID-CONTENT-TYPE: arista\n!\ndaemon TerminAttr\n   exec /usr/bin/TerminAttr\
     \ -cvaddr=10.73.1.238:9910 -cvauth=token,/tmp/token -cvvrf=default -cvsourceip=192.168.0.15\
     \ -cvgnmi -smashexcludes=ale,flexCounter,hardware,kni,pulse,strata -ingestexclude=/Sysdb/cell/1/agent,/Sysdb/cell/2/agent\
@@ -355,18 +355,18 @@ CVP_CONFIGLETS:
     \ remote-as 65001\n   neighbor 192.0.255.1 description spine1\n   neighbor 192.0.255.2\
     \ peer group EVPN-OVERLAY-PEERS\n   neighbor 192.0.255.2 remote-as 65001\n   neighbor\
     \ 192.0.255.2 description spine2\n   redistribute connected route-map RM-CONN-2-BGP\n\
-    \   !\n   vlan-aware-bundle Tenant_A_OP_Zone\n      rd 192.0.255.6:10\n      route-target\
-    \ both 10:10\n      redistribute learned\n      vlan 110\n   !\n   vlan-aware-bundle\
-    \ Tenant_A_VMOTION\n      rd 192.0.255.6:55160\n      route-target both 55160:55160\n\
-    \      redistribute learned\n      vlan 160\n   !\n   address-family evpn\n  \
-    \    neighbor EVPN-OVERLAY-PEERS activate\n   !\n   address-family ipv4\n    \
-    \  no neighbor EVPN-OVERLAY-PEERS activate\n      neighbor IPv4-UNDERLAY-PEERS\
+    \   !\n   vlan 110\n      rd 192.0.255.6:10110\n      route-target both 10110:10110\n\
+    \      redistribute learned\n   !\n   vlan 160\n      rd 192.0.255.6:55160\n \
+    \     route-target both 55160:55160\n      redistribute learned\n   !\n   address-family\
+    \ evpn\n      neighbor EVPN-OVERLAY-PEERS activate\n   !\n   address-family ipv4\n\
+    \      no neighbor EVPN-OVERLAY-PEERS activate\n      neighbor IPv4-UNDERLAY-PEERS\
     \ activate\n      neighbor MLAG-IPv4-UNDERLAY-PEER activate\n   !\n   vrf Tenant_A_OP_Zone\n\
     \      rd 192.0.255.6:10\n      route-target import evpn 10:10\n      route-target\
     \ export evpn 10:10\n      router-id 192.0.255.6\n      neighbor 10.255.251.4\
     \ peer group MLAG-IPv4-UNDERLAY-PEER\n      redistribute connected\n!\nmanagement\
     \ api http-commands\n   protocol https\n   no shutdown\n   !\n   vrf default\n\
-    \      no shutdown\n!\ninterface Management0\n   no lldp transmit\n\n!\nend\n"
+    \      no shutdown\n!\nmanagement ssh\n   idle-timeout 360\n   no shutdown\n \
+    \  log-level DEBUG\n!\ninterface Management0\n   no lldp transmit\n\n!\nend\n"
   AVD_ATD_spine1: "!RANCID-CONTENT-TYPE: arista\n!\ndaemon TerminAttr\n   exec /usr/bin/TerminAttr\
     \ -cvaddr=10.73.1.238:9910 -cvauth=token,/tmp/token -cvvrf=default -cvsourceip=192.168.0.10\
     \ -cvgnmi -smashexcludes=ale,flexCounter,hardware,kni,pulse,strata -ingestexclude=/Sysdb/cell/1/agent,/Sysdb/cell/2/agent\
@@ -421,8 +421,9 @@ CVP_CONFIGLETS:
     \ evpn\n      neighbor EVPN-OVERLAY-PEERS activate\n   !\n   address-family ipv4\n\
     \      no neighbor EVPN-OVERLAY-PEERS activate\n      neighbor IPv4-UNDERLAY-PEERS\
     \ activate\n!\nmanagement api http-commands\n   protocol https\n   no shutdown\n\
-    \   !\n   vrf default\n      no shutdown\n!\ninterface Management0\n   no lldp\
-    \ transmit\n\n!\nend\n"
+    \   !\n   vrf default\n      no shutdown\n!\nmanagement ssh\n   idle-timeout 360\n\
+    \   no shutdown\n   log-level DEBUG\n!\ninterface Management0\n   no lldp transmit\n\
+    \n!\nend\n"
   AVD_ATD_spine2: "!RANCID-CONTENT-TYPE: arista\n!\ndaemon TerminAttr\n   exec /usr/bin/TerminAttr\
     \ -cvaddr=10.73.1.238:9910 -cvauth=token,/tmp/token -cvvrf=default -cvsourceip=192.168.0.11\
     \ -cvgnmi -smashexcludes=ale,flexCounter,hardware,kni,pulse,strata -ingestexclude=/Sysdb/cell/1/agent,/Sysdb/cell/2/agent\
@@ -477,8 +478,9 @@ CVP_CONFIGLETS:
     \ evpn\n      neighbor EVPN-OVERLAY-PEERS activate\n   !\n   address-family ipv4\n\
     \      no neighbor EVPN-OVERLAY-PEERS activate\n      neighbor IPv4-UNDERLAY-PEERS\
     \ activate\n!\nmanagement api http-commands\n   protocol https\n   no shutdown\n\
-    \   !\n   vrf default\n      no shutdown\n!\ninterface Management0\n   no lldp\
-    \ transmit\n\n!\nend\n"
+    \   !\n   vrf default\n      no shutdown\n!\nmanagement ssh\n   idle-timeout 360\n\
+    \   no shutdown\n   log-level DEBUG\n!\ninterface Management0\n   no lldp transmit\n\
+    \n!\nend\n"
 CVP_TOPOLOGY:
   ATD_FABRIC:
     parent_container: ATD_LAB
