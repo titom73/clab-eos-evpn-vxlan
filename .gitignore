@@ -67,5 +67,9 @@ terraform.rc
 
 *.yml.bak
 
+clab-atd-vxlan/
+clab-atd-vxlan/**
+
 ansible-collections/
 ansible-collections/**
+
