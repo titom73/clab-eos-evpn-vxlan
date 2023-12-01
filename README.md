@@ -16,7 +16,7 @@ Lab versions:
 ```bash
 $ cd containerlab-topology
 
-$ sudo containerlab deploy --topo topology.yml
+$ sudo containerlab deploy
 ```
 
 - Save lab
@@ -24,7 +24,7 @@ $ sudo containerlab deploy --topo topology.yml
 ```bash
 $ cd containerlab-topology
 
-$ sudo containerlab save --topo topology.yml
+$ sudo containerlab save
 ```
 
 - Destroy lab
@@ -32,7 +32,7 @@ $ sudo containerlab save --topo topology.yml
 ```bash
 $ cd containerlab-topology
 
-$ sudo containerlab destroy --topo topology.yml
+$ sudo containerlab destroy
 ```
 
 ## Configuration Management
@@ -72,7 +72,7 @@ ansible-playbook playbooks/atd-fabric-deploy.yml --tags build,deploy_cvp
 
 ## Authentication
 
-- Username: __admin__ (password: _none_)
+- Username: __admin__ (password: _none_ no ssh access)
 - Username: __ansible__ (password: `ansible`)
 - Username: __cvpadmin__ (password: `ansible`)
 - Username: __arista__ (password: `arista`)
@@ -92,26 +92,7 @@ ansible-playbook playbooks/atd-fabric-deploy.yml --tags build,deploy_cvp
 
 ## Startup configuration
 
-Devices configuration are saved under [containerlab-topology/configs](containerlab-topology/configs) folder
-
-## Configure SSH client
-
-- Copy `ssh-config` file to `~/.ssh/config.d/ssh-atd-containerlab`
-
-```bash
-$ mkdir -p ~/.ssh/config.d
-
-$ cp ssh-config ~/.ssh/config.d/ssh-atd-containerlab
-```
-
-- Update your ssh configuration file
-
-```bash
-$ vim ~/.ssh/config
-
-# Insert at the top of your file
-Include config.d/atd-containerlab
-```
+Devices configuration are saved under [containerlab-topology/configs](containerlab-topology/configs) folder for host devices.
 
 ### Configure remote access
 

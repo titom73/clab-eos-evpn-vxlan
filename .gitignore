@@ -64,4 +64,8 @@ override.tf.json
 .terraformrc
 terraform.rc
 **/.terraform.lock.hcl
-containerlab-topology/.topology.yml.bak
+
+*.yml.bak
+
+ansible-collections/
+ansible-collections/**

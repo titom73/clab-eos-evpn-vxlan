@@ -57,6 +57,11 @@ dns_domain: atd.lab
 # ntp_servers:
 #  - 192.168.0.1
 
+management_ssh:
+  enable: True
+  idle_timeout: 360
+  log_level: DEBUG
+
 aaa_authorization:
   exec:
     default: local
