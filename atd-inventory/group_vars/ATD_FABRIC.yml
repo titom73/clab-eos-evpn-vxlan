@@ -67,9 +67,9 @@ l3leaf:
         tenants: # default=['all']
           - all
         tags: # default=['all']
-          - border
+          - compute
         always_include_vrfs_in_tenants:
-          - Tenant_A
+          - PRJ01_APP01
       nodes:
         leaf1:
           id: 1

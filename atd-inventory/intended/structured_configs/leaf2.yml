@@ -65,6 +65,31 @@ router_bgp:
     peer_groups:
       EVPN-OVERLAY-PEERS:
         activate: true
+  vrfs:
+    PRJ01_APP01:
+      router_id: 192.0.255.4
+      rd: 192.0.255.4:10
+      route_targets:
+        import:
+          evpn:
+          - '10:10'
+        export:
+          evpn:
+          - '10:10'
+      redistribute_routes:
+      - connected
+      neighbors:
+        10.255.251.0:
+          peer_group: MLAG-IPv4-UNDERLAY-PEER
+  vlans:
+    110:
+      tenant: PROJECT01
+      rd: 192.0.255.4:10110
+      route_targets:
+        both:
+        - 10110:10110
+      redistribute_routes:
+      - learned
 static_routes:
 - vrf: default
   destination_address_prefix: 0.0.0.0/0
@@ -108,6 +133,9 @@ local_users:
 vrfs:
   default:
     ip_routing: false
+  PRJ01_APP01:
+    tenant: PROJECT01
+    ip_routing: true
 management_interfaces:
   Management0:
     description: oob_management
@@ -132,6 +160,14 @@ vlans:
     name: MLAG_PEER
     trunk_groups:
     - MLAG
+  110:
+    tenant: PROJECT01
+    name: TEST_01
+  3009:
+    tenant: PROJECT01
+    name: MLAG_iBGP_PRJ01_APP01
+    trunk_groups:
+    - LEAF_PEER_L3
 vlan_interfaces:
   Vlan4093:
     description: MLAG_PEER_L3_PEERING
@@ -144,6 +180,22 @@ vlan_interfaces:
     ip_address: 10.255.252.1/31
     no_autostate: true
     mtu: 1500
+  Vlan110:
+    tenant: PROJECT01
+    tags:
+    - compute
+    description: TEST_01
+    shutdown: false
+    ip_address_virtual: 10.1.10.1/24
+    vrf: PRJ01_APP01
+  Vlan3009:
+    tenant: PROJECT01
+    type: underlay_peering
+    shutdown: false
+    description: 'MLAG_PEER_L3_iBGP: vrf PRJ01_APP01'
+    vrf: PRJ01_APP01
+    mtu: 1500
+    ip_address: 10.255.251.1/31
 port_channel_interfaces:
   Port-Channel1:
     description: MLAG_PEER_leaf1_Po1
@@ -244,6 +296,11 @@ loopback_interfaces:
     description: VTEP_VXLAN_Tunnel_Source
     shutdown: false
     ip_address: 192.0.254.3/32
+  Loopback100:
+    description: PRJ01_APP01_VTEP_DIAGNOSTICS
+    shutdown: false
+    vrf: PRJ01_APP01
+    ip_address: 10.255.1.4/32
 prefix_lists:
   PL-LOOPBACKS-EVPN-OVERLAY:
     sequence_numbers:
@@ -266,3 +323,12 @@ vxlan_interface:
       udp_port: 4789
       source_interface: Loopback1
       virtual_router_encapsulation_mac_address: mlag-system-id
+      vlans:
+        110:
+          vni: 10110
+      vrfs:
+        PRJ01_APP01:
+          vni: 10
+virtual_source_nat_vrfs:
+  PRJ01_APP01:
+    ip_address: 10.255.1.4

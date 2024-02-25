@@ -9,6 +9,8 @@ topology:
   kinds:
     ceos:
       image: arista/ceos:${EOS_VERSION:=4.30.3M}
+    linux:
+      image: titom73/multitool:latest
   nodes:
     spine1:
       kind: ceos
@@ -16,48 +18,84 @@ topology:
       startup-config: atd-inventory/intended/configs/spine1.cfg
       env:
         TMODE: lacp
+      labels:
+        graph-level: 1
+        graph-icon: router
     spine2:
       kind: ceos
       mgmt-ipv4: 192.168.0.11
       startup-config: atd-inventory/intended/configs/spine2.cfg
       env:
         TMODE: lacp
+      labels:
+        graph-level: 1
+        graph-icon: router
     leaf1:
       kind: ceos
       mgmt-ipv4: 192.168.0.12
       startup-config: atd-inventory/intended/configs/leaf1.cfg
       env:
         TMODE: lacp
+      labels:
+        graph-level: 2
+        graph-icon: switch
     leaf2:
       kind: ceos
       mgmt-ipv4: 192.168.0.13
       startup-config: atd-inventory/intended/configs/leaf2.cfg
       env:
         TMODE: lacp
+      labels:
+        graph-level: 2
+        graph-icon: switch
     leaf3:
       kind: ceos
       mgmt-ipv4: 192.168.0.14
       startup-config: atd-inventory/intended/configs/leaf3.cfg
       env:
         TMODE: lacp
+      labels:
+        graph-level: 2
+        graph-icon: switch
     leaf4:
       kind: ceos
       mgmt-ipv4: 192.168.0.15
       startup-config: atd-inventory/intended/configs/leaf4.cfg
       env:
         TMODE: lacp
+      labels:
+        graph-level: 2
+        graph-icon: switch
     host1:
-      kind: ceos
+      kind: linux
       mgmt-ipv4: 192.168.0.16
-      startup-config: configs/host1.cfg
+      # startup-config: configs/host1.cfg
       env:
         TMODE: lacp
+      exec:
+        - sleep 10
+        - vconfig add team0 110
+        - ifconfig team0.110 10.1.10.11 netmask 255.255.255.0
+        - ip route del default
+        - ip route add default via 10.1.10.1
+      labels:
+        graph-level: 3
+        graph-icon: host
     host2:
-      kind: ceos
+      kind: linux
       mgmt-ipv4: 192.168.0.17
-      startup-config: configs/host2.cfg
+      # startup-config: configs/host2.cfg
       env:
         TMODE: lacp
+      exec:
+        - sleep 10
+        - vconfig add team0 110
+        - ifconfig team0.110 10.1.10.12 netmask 255.255.255.0
+        - ip route del default
+        - ip route add default via 10.1.10.1
+      labels:
+        graph-level: 3
+        graph-icon: host
 
     # --------------------------------------- #
     # Graphite Node                           #
@@ -70,7 +108,7 @@ topology:
       image: netreplica/graphite
       env:
         GRAPHITE_DEFAULT_TYPE: clab
-        GRAPHITE_DEFAULT_TOPO: atd
+        GRAPHITE_DEFAULT_TOPO: atd-vxlan
       binds:
         - .:/htdocs/clab    # New path required for latest version
       ports:
