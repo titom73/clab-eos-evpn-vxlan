@@ -72,10 +72,16 @@ ansible-playbook playbooks/atd-fabric-deploy.yml --tags build,deploy_cvp
 
 ## Authentication
 
+### Arista devices
+
 - Username: __admin__ (password: _none_ no ssh access)
 - Username: __ansible__ (password: `ansible`)
 - Username: __cvpadmin__ (password: `ansible`)
 - Username: __arista__ (password: `arista`)
+
+### Host devices
+
+- Username: __root__ (password: `password123`)
 
 ## Management IPs
 
