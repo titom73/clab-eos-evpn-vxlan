@@ -63,6 +63,13 @@ l3leaf:
   node_groups:
     pod1:
       bgp_as: 65101
+      filter:
+        tenants: # default=['all']
+          - all
+        tags: # default=['all']
+          - border
+        always_include_vrfs_in_tenants:
+          - Tenant_A
       nodes:
         leaf1:
           id: 1
@@ -74,6 +81,11 @@ l3leaf:
           uplink_switch_interfaces: [Ethernet3, Ethernet3]
     pod2:
       bgp_as: 65102
+      filter:
+        tenants: # default=['all']
+          - all
+        tags: # default=['all']
+          - compute
       nodes:
         leaf3:
           id: 3

@@ -66,7 +66,7 @@ router_bgp:
       EVPN-OVERLAY-PEERS:
         activate: true
   vrfs:
-    Tenant_A_OP_Zone:
+    PRJ01_APP01:
       router_id: 192.0.255.5
       rd: 192.0.255.5:10
       route_targets:
@@ -83,19 +83,11 @@ router_bgp:
           peer_group: MLAG-IPv4-UNDERLAY-PEER
   vlans:
     110:
-      tenant: Tenant_A
+      tenant: PROJECT01
       rd: 192.0.255.5:10110
       route_targets:
         both:
         - 10110:10110
-      redistribute_routes:
-      - learned
-    160:
-      tenant: Tenant_A
-      rd: 192.0.255.5:55160
-      route_targets:
-        both:
-        - 55160:55160
       redistribute_routes:
       - learned
 static_routes:
@@ -141,8 +133,8 @@ local_users:
 vrfs:
   default:
     ip_routing: false
-  Tenant_A_OP_Zone:
-    tenant: Tenant_A
+  PRJ01_APP01:
+    tenant: PROJECT01
     ip_routing: true
 management_interfaces:
   Management0:
@@ -169,16 +161,13 @@ vlans:
     trunk_groups:
     - MLAG
   110:
-    tenant: Tenant_A
-    name: Tenant_A_OP_Zone_1
+    tenant: PROJECT01
+    name: TEST_01
   3009:
-    tenant: Tenant_A
-    name: MLAG_iBGP_Tenant_A_OP_Zone
+    tenant: PROJECT01
+    name: MLAG_iBGP_PRJ01_APP01
     trunk_groups:
     - LEAF_PEER_L3
-  160:
-    tenant: Tenant_A
-    name: Tenant_A_VMOTION
 vlan_interfaces:
   Vlan4093:
     description: MLAG_PEER_L3_PEERING
@@ -192,19 +181,19 @@ vlan_interfaces:
     no_autostate: true
     mtu: 1500
   Vlan110:
-    tenant: Tenant_A
+    tenant: PROJECT01
     tags:
-    - opzone
-    description: Tenant_A_OP_Zone_1
+    - compute
+    description: TEST_01
     shutdown: false
     ip_address_virtual: 10.1.10.1/24
-    vrf: Tenant_A_OP_Zone
+    vrf: PRJ01_APP01
   Vlan3009:
-    tenant: Tenant_A
+    tenant: PROJECT01
     type: underlay_peering
     shutdown: false
-    description: 'MLAG_PEER_L3_iBGP: vrf Tenant_A_OP_Zone'
-    vrf: Tenant_A_OP_Zone
+    description: 'MLAG_PEER_L3_iBGP: vrf PRJ01_APP01'
+    vrf: PRJ01_APP01
     mtu: 1500
     ip_address: 10.255.251.4/31
 port_channel_interfaces:
@@ -308,9 +297,9 @@ loopback_interfaces:
     shutdown: false
     ip_address: 192.0.254.5/32
   Loopback100:
-    description: Tenant_A_OP_Zone_VTEP_DIAGNOSTICS
+    description: PRJ01_APP01_VTEP_DIAGNOSTICS
     shutdown: false
-    vrf: Tenant_A_OP_Zone
+    vrf: PRJ01_APP01
     ip_address: 10.255.1.5/32
 prefix_lists:
   PL-LOOPBACKS-EVPN-OVERLAY:
@@ -337,11 +326,9 @@ vxlan_interface:
       vlans:
         110:
           vni: 10110
-        160:
-          vni: 55160
       vrfs:
-        Tenant_A_OP_Zone:
+        PRJ01_APP01:
           vni: 10
 virtual_source_nat_vrfs:
-  Tenant_A_OP_Zone:
+  PRJ01_APP01:
     ip_address: 10.255.1.5
