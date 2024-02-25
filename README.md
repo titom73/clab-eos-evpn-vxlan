@@ -93,25 +93,3 @@ ansible-playbook playbooks/atd-fabric-deploy.yml --tags build,deploy_cvp
 ## Startup configuration
 
 Devices configuration are saved under [containerlab-topology/configs](containerlab-topology/configs) folder for host devices.
-
-### Configure remote access
-
-Only applicable if your containerlab topology is running on a remote server:
-
-```bash
-$ vim ~/.ssh/config.d/ssh-atd-containerlab
-
-# Host jump-clab
-#     IdentityFile ~/.ssh/id-tom
-#     UserKnownHostsFile ~/.ssh/atd_known_hosts
-#     HostName 10.0.0.1
-#     ControlMaster   auto
-#     ControlPath     ~/.ssh/mux-%r@%h:%p
-#     ControlPersist  15m
-#     User arista
-```
-
-Uncomment this section and update information:
-- `HostName` section with IP address of your remote server
-- `User`: Your remote username
-- `IdentityFile`: (Optional) your ssh key
