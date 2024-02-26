@@ -110,4 +110,4 @@ ansible-playbook playbooks/atd-fabric-deploy.yml --tags build,deploy_cvp
 
 ## Startup configuration
 
-Devices configuration are saved under [containerlab-topology/configs](containerlab-topology/configs) folder for host devices.
+EOS devices configuration are saved under [atd-inventory/intended/configs](atd-inventory/intended/configs).

@@ -1,24 +1,24 @@
 ---
 local_users:
-  admin:
+  - name: admin
     privilege: 15
     role: network-admin
     no_password: true
     # sha512_password: "$6$Df86J4/SFMDE3/1K$Hef4KstdoxNDaami37cBquTWOTplC.miMPjXVgQxMe92.e5wxlnXOLlebgPj8Fz1KO0za/RCO7ZIs4Q6Eiq1g1"
 
-  ansible:
+  - name: ansible
     privilege: 15
     role: network-admin
     # password: ansible
     sha512_password: "$6$Dzu11L7yp9j3nCM9$FSptxMPyIL555OMO.ldnjDXgwZmrfMYwHSr0uznE5Qoqvd9a6UdjiFcJUhGLtvXVZR1r.A/iF5aAt50hf/EK4/"
 
-  arista:
+  - name: arista
     privilege: 15
     role: network-admin
     # password: arista
     sha512_password: "$6$7WhvEi5Ce5f5Ut3z$Ethmha7rb710RKsaVteusVOuNP1Utfjzse58xxbgiZp4MF0fp7BX5lAw8yBgv/HWCihVomuCSrsJx8wKnJ7Tm1"
 
-  tom:
+  - name: tom
     privilege: 15
     role: network-admin
     # password: arista123
@@ -46,9 +46,9 @@ daemon_terminattr:
   smashexcludes: 'ale,flexCounter,hardware,kni,pulse,strata'
 
 # dns servers.
-name_servers:
-  - 192.168.2.1
-  - 8.8.8.8
+ip_name_servers:
+  - ip_address: 192.168.2.1
+  - ip_address: 8.8.8.8
 
 # dns domain
 dns_domain: atd.lab
@@ -59,8 +59,7 @@ dns_domain: atd.lab
 
 management_ssh:
   enable: True
-  idle_timeout: 360
-  log_level: DEBUG
+  idle_timeout: 0
 
 aaa_authorization:
   exec:

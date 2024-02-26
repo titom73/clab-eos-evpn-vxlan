@@ -5,51 +5,47 @@ port_profiles:
     vlans: "100-199"
 
 servers:
-  host1:
+  - name: host1
     rack: pod1
     adapters:
-      - type: nic
-        server_ports: [Eth1, Eth2]
+      - endpoint_ports: [Eth1, Eth2]
         switch_ports: [Ethernet4, Ethernet4]
         switches: [leaf1, leaf2]
         profile: TRUNK_ALL
         port_channel:
-          state: present
+          # state: present
           description: PortChanne1
           mode: active
-  host2:
+  - name: host2
     rack: pod2
     adapters:
-      - type: nic
-        server_ports: [Eth1, Eth2]
+      - endpoint_ports: [Eth1, Eth2]
         switch_ports: [Ethernet4, Ethernet4]
         switches: [leaf3, leaf4]
         profile: TRUNK_ALL
         port_channel:
-          state: present
+          # state: present
           description: PortChanne1
           mode: active
-  host3:
+  - name: host3
     rack: pod1
     adapters:
-      - type: nic
-        server_ports: [Eth1, Eth2]
+      - endpoint_ports: [Eth1, Eth2]
         switch_ports: [Ethernet5, Ethernet5]
         switches: [leaf1, leaf2]
         profile: TRUNK_ALL
         port_channel:
-          state: present
+          # state: present
           description: PortChanne1
           mode: active
-  host4:
+  - name: host4
     rack: pod2
     adapters:
-      - type: nic
-        server_ports: [Eth1, Eth2]
+      - endpoint_ports: [Eth1, Eth2]
         switch_ports: [Ethernet5, Ethernet5]
         switches: [leaf3, leaf4]
         profile: TRUNK_ALL
         port_channel:
-          state: present
+          # state: present
           description: PortChanne1
           mode: active
