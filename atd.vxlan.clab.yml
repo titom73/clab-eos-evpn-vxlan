@@ -77,7 +77,22 @@ topology:
         - vconfig add team0 110
         - ifconfig team0.110 10.1.10.11 netmask 255.255.255.0
         - ip route del default
-        - ip route add default via 10.1.10.1
+        # - ip route add default via 10.1.10.1
+      labels:
+        graph-level: 3
+        graph-icon: host
+    host3:
+      kind: linux
+      mgmt-ipv4: 192.168.0.18
+      # startup-config: configs/host1.cfg
+      env:
+        TMODE: lacp
+      exec:
+        - sleep 10
+        - vconfig add team0 111
+        - ifconfig team0.111 10.1.11.13 netmask 255.255.255.0
+        - ip route del default
+        - ip route add default via 10.1.11.1
       labels:
         graph-level: 3
         graph-icon: host
@@ -92,7 +107,22 @@ topology:
         - vconfig add team0 110
         - ifconfig team0.110 10.1.10.12 netmask 255.255.255.0
         - ip route del default
-        - ip route add default via 10.1.10.1
+        # - ip route add default via 10.1.10.1
+      labels:
+        graph-level: 3
+        graph-icon: host
+    host4:
+      kind: linux
+      mgmt-ipv4: 192.168.0.19
+      # startup-config: configs/host1.cfg
+      env:
+        TMODE: lacp
+      exec:
+        - sleep 10
+        - vconfig add team0 112
+        - ifconfig team0.112 10.1.12.14 netmask 255.255.255.0
+        - ip route del default
+        - ip route add default via 10.1.12.1
       labels:
         graph-level: 3
         graph-icon: host
@@ -137,11 +167,13 @@ topology:
     - endpoints: ["spine1:eth6", "spine2:eth6"]
     # Host1 Links
     - endpoints: ["leaf1:eth4", "host1:eth1"]
-    - endpoints: ["leaf1:eth5", "host1:eth3"]
     - endpoints: ["leaf2:eth4", "host1:eth2"]
-    - endpoints: ["leaf2:eth5", "host1:eth4"]
+    # Host 3 Links
+    - endpoints: ["leaf1:eth5", "host3:eth1"]
+    - endpoints: ["leaf2:eth5", "host3:eth2"]
     # Host2 Links
     - endpoints: ["leaf3:eth4", "host2:eth1"]
-    - endpoints: ["leaf3:eth5", "host2:eth3"]
     - endpoints: ["leaf4:eth4", "host2:eth2"]
-    - endpoints: ["leaf4:eth5", "host2:eth4"]
+    # Host 4 Links
+    - endpoints: ["leaf3:eth5", "host4:eth1"]
+    - endpoints: ["leaf4:eth5", "host4:eth2"]

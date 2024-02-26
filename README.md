@@ -1,37 +1,42 @@
 # Arista ATD Emulation on Containerlab
 
-Lab versions:
+Basic EVPN/VXLAN setup based on [containerlab](https://containerlab.dev/) and [Arista AVD collection](https://www.avd.sh) to build configuration.
 
-- Configuration with ansible management via eAPI or CVP: [`main`](https://github.com/titom73/atd-containerlab/tree/main) or [`avd-builder`](https://github.com/titom73/atd-containerlab/tree/avd-builder) branches
-- Configuration managed manually without automation: [`no-ansible`](https://github.com/titom73/atd-containerlab/tree/no-ansible) branch
+## Requirements
+
+- Containerlab in version `>=0.50.0`
+- Ansible
+- Arista anta
+- EOS Dowloader CLI
+
+```bash
+pip install -r requirements.txt
+
+ansible-galaxy collection install -r collections.yml --force
+```
 
 ## Topology
 
-![](diagram.jpg)
+![](diagram.png)
 
-> CVP is not part of this lab
 
 - Deploy lab:
 
 ```bash
-$ cd containerlab-topology
-
 $ sudo containerlab deploy
 ```
+
+You can access lab topology using SSH or your browser with `http://<IP of clab>/graphite`
 
 - Save lab
 
 ```bash
-$ cd containerlab-topology
-
 $ sudo containerlab save
 ```
 
 - Destroy lab
 
 ```bash
-$ cd containerlab-topology
-
 $ sudo containerlab destroy
 ```
 
@@ -75,8 +80,6 @@ ansible-playbook playbooks/atd-fabric-deploy.yml --tags build,deploy_cvp
 ### Arista devices
 
 - Username: __admin__ (password: _none_ no ssh access)
-- Username: __ansible__ (password: `ansible`)
-- Username: __cvpadmin__ (password: `ansible`)
 - Username: __arista__ (password: `arista`)
 
 ### Host devices
@@ -84,6 +87,8 @@ ansible-playbook playbooks/atd-fabric-deploy.yml --tags build,deploy_cvp
 - Username: __root__ (password: `password123`)
 
 ## Management IPs
+
+### Arista EOS containers
 
 | Hostname | Managemnt Interface | IP Address      |
 | -------- | ------------------- | --------------  |
@@ -93,8 +98,15 @@ ansible-playbook playbooks/atd-fabric-deploy.yml --tags build,deploy_cvp
 | Leaf2    | Management0         | 192.168.0.13/24 |
 | Leaf3    | Management0         | 192.168.0.14/24 |
 | Leaf4    | Management0         | 192.168.0.15/24 |
+
+### Linux containers
+
+| Hostname | Managemnt Interface | IP Address      |
+| -------- | ------------------- | --------------  |
 | Host1    | Management0         | 192.168.0.16/24 |
 | Host2    | Management0         | 192.168.0.17/24 |
+| Host3    | Management0         | 192.168.0.18/24 |
+| Host4    | Management0         | 192.168.0.19/24 |
 
 ## Startup configuration
 
