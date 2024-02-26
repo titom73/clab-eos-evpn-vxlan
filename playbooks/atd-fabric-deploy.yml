@@ -28,15 +28,15 @@
       import_role:
         name: arista.avd.eos_config_deploy_eapi
 
-- name: Deploy configuration to CLoudvision
-  hosts: [cv_servers]
-  tasks:
-    - name: "provision Cloudvision with devices configuration"
-      tags: [deploy_cvp, never]
-      import_role:
-        name: arista.avd.eos_config_deploy_cvp
-      vars:
-        container_root: "ATD_LAB"
-        configlets_prefix: 'AVD_ATD'
-        execute_tasks: false
-        state: present
+# - name: Deploy configuration to CLoudvision
+#   hosts: [cv_servers]
+#   tasks:
+#     - name: "provision Cloudvision with devices configuration"
+#       tags: [deploy_cvp, never]
+#       import_role:
+#         name: arista.avd.eos_config_deploy_cvp
+#       vars:
+#         container_root: "ATD_LAB"
+#         configlets_prefix: 'AVD_ATD'
+#         execute_tasks: false
+#         state: present

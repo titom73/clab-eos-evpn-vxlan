@@ -1,6 +1,6 @@
 collections:
   - name: arista.avd
-    version: 3.8.7
+    version: 4.6.0
   - arista.eos
   - ansible.netcommon
   - ansible.posix

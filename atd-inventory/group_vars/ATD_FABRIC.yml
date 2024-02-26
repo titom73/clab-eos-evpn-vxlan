@@ -5,16 +5,33 @@
 fabric_name: ATD_FABRIC
 
 # Enable vlan aware bundles
-vxlan_vlan_aware_bundles: false
+evpn_vlan_aware_bundles: false
 
-# bgp peer groups passwords
+# BGP peer groups passwords
 bgp_peer_groups:
-  IPv4_UNDERLAY_PEERS:
+  ipv4_underlay_peers:
     password: "AQQvKeimxJu+uGQ/yYvv9w=="
-  EVPN_OVERLAY_PEERS:
+  evpn_overlay_peers:
     password: "q+VNViP5i4rVjW1cxFv2wA=="
-  MLAG_IPv4_UNDERLAY_PEER:
+  mlag_ipv4_underlay_peer:
     password: "vnEaG8gMeQf3d3cN6PktXQ=="
+
+# BGP Defaults
+
+bgp_graceful_restart:
+  enabled: true
+  restart_time: 300
+
+bgp_distance:
+  external_routes: 20
+  internal_routes: 200
+  local_routes: 200
+
+bgp_default_ipv4_unicast: false
+
+########################################
+# Fabric Topology
+########################################
 
 # Spine Switches
 spine:
@@ -22,17 +39,12 @@ spine:
     platform: ceos
     bgp_as: 65001
     loopback_ipv4_pool: 192.0.255.0/24
-    bgp_defaults:
-      - 'no bgp default ipv4-unicast'
-      - 'distance bgp 20 200 200'
-      - 'graceful-restart restart-time 300'
-      - 'graceful-restart'
     mlag: false
   nodes:
-    spine1:
+    - name: spine1
       id: 1
       mgmt_ip: 192.168.0.10/24
-    spine2:
+    - name: spine2
       id: 2
       mgmt_ip: 192.168.0.11/24
 
@@ -53,15 +65,10 @@ l3leaf:
     mlag_peer_ipv4_pool: 10.255.252.0/24
     mlag_peer_l3_ipv4_pool: 10.255.251.0/24
     virtual_router_mac_address: 00:1c:73:00:dc:01
-    bgp_defaults:
-      - 'no bgp default ipv4-unicast'
-      - 'distance bgp 20 200 200'
-      - 'graceful-restart restart-time 300'
-      - 'graceful-restart'
     spanning_tree_mode: mstp
     spanning_tree_priority: 16384
   node_groups:
-    pod1:
+    - group: pod1
       bgp_as: 65101
       filter:
         tenants: # default=['all']
@@ -72,15 +79,15 @@ l3leaf:
         # always_include_vrfs_in_tenants:
         #   - PRJ01_APP01
       nodes:
-        leaf1:
+        - name: leaf1
           id: 1
           mgmt_ip: 192.168.0.12/24
           uplink_switch_interfaces: [Ethernet2, Ethernet2]
-        leaf2:
+        - name: leaf2
           id: 2
           mgmt_ip: 192.168.0.13/24
           uplink_switch_interfaces: [Ethernet3, Ethernet3]
-    pod2:
+    - group: pod2
       bgp_as: 65102
       filter:
         tenants: # default=['all']
@@ -89,11 +96,11 @@ l3leaf:
           - compute
           - rack02
       nodes:
-        leaf3:
+        - name: leaf3
           id: 3
           mgmt_ip: 192.168.0.14/24
           uplink_switch_interfaces: [Ethernet4, Ethernet4]
-        leaf4:
+        - name: leaf4
           id: 4
           mgmt_ip: 192.168.0.15/24
           uplink_switch_interfaces: [Ethernet5, Ethernet5]
