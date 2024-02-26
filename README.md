@@ -103,10 +103,10 @@ ansible-playbook playbooks/atd-fabric-deploy.yml --tags build,deploy_cvp
 
 | Hostname | Managemnt Interface | IP Address      |
 | -------- | ------------------- | --------------  |
-| Host1    | Management0         | 192.168.0.16/24 |
-| Host2    | Management0         | 192.168.0.17/24 |
-| Host3    | Management0         | 192.168.0.18/24 |
-| Host4    | Management0         | 192.168.0.19/24 |
+| Host1    | Eth0                | 192.168.0.16/24 |
+| Host2    | Eth0                | 192.168.0.17/24 |
+| Host3    | Eth0                | 192.168.0.18/24 |
+| Host4    | Eth0                | 192.168.0.19/24 |
 
 ## Startup configuration
 
