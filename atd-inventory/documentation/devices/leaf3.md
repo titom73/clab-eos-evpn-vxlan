@@ -295,7 +295,8 @@ vlan internal order ascending range 1006 1199
 
 | VLAN ID | Name | Trunk Groups |
 | ------- | ---- | ------------ |
-| 110 | TEST_01 | - |
+| 110 | L2VLAN_FABRIC | - |
+| 112 | VLAN_VTEP_03_04 | - |
 | 3009 | MLAG_iBGP_PRJ01_APP01 | LEAF_PEER_L3 |
 | 4093 | LEAF_PEER_L3 | LEAF_PEER_L3 |
 | 4094 | MLAG_PEER | MLAG |
@@ -305,7 +306,10 @@ vlan internal order ascending range 1006 1199
 ```eos
 !
 vlan 110
-   name TEST_01
+   name L2VLAN_FABRIC
+!
+vlan 112
+   name VLAN_VTEP_03_04
 !
 vlan 3009
    name MLAG_iBGP_PRJ01_APP01
@@ -331,8 +335,8 @@ vlan 4094
 | Interface | Description | Mode | VLANs | Native VLAN | Trunk Group | Channel-Group |
 | --------- | ----------- | ---- | ----- | ----------- | ----------- | ------------- |
 | Ethernet1 | MLAG_PEER_leaf4_Ethernet1 | *trunk | *2-4094 | *- | *['LEAF_PEER_L3', 'MLAG'] | 1 |
-| Ethernet4 | host2_Eth1 | *trunk | *110 | *- | *- | 4 |
-| Ethernet5 | host2_Eth2 | *trunk | *110 | *- | *- | 4 |
+| Ethernet4 | host2_Eth1 | *trunk | *100-199 | *- | *- | 4 |
+| Ethernet5 | host4_Eth1 | *trunk | *100-199 | *- | *- | 5 |
 
 *Inherited from Port-Channel Interface
 
@@ -372,9 +376,9 @@ interface Ethernet4
    channel-group 4 mode active
 !
 interface Ethernet5
-   description host2_Eth2
+   description host4_Eth1
    no shutdown
-   channel-group 4 mode active
+   channel-group 5 mode active
 ```
 
 ## Port-Channel Interfaces
@@ -386,7 +390,8 @@ interface Ethernet5
 | Interface | Description | Type | Mode | VLANs | Native VLAN | Trunk Group | LACP Fallback Timeout | LACP Fallback Mode | MLAG ID | EVPN ESI |
 | --------- | ----------- | ---- | ---- | ----- | ----------- | ------------| --------------------- | ------------------ | ------- | -------- |
 | Port-Channel1 | MLAG_PEER_leaf4_Po1 | switched | trunk | 2-4094 | - | ['LEAF_PEER_L3', 'MLAG'] | - | - | - | - |
-| Port-Channel4 | host2_PortChanne1 | switched | trunk | 110 | - | - | - | - | 4 | - |
+| Port-Channel4 | host2_PortChanne1 | switched | trunk | 100-199 | - | - | - | - | 4 | - |
+| Port-Channel5 | host4_PortChanne1 | switched | trunk | 100-199 | - | - | - | - | 5 | - |
 
 ### Port-Channel Interfaces Device Configuration
 
@@ -405,9 +410,17 @@ interface Port-Channel4
    description host2_PortChanne1
    no shutdown
    switchport
-   switchport trunk allowed vlan 110
+   switchport trunk allowed vlan 100-199
    switchport mode trunk
    mlag 4
+!
+interface Port-Channel5
+   description host4_PortChanne1
+   no shutdown
+   switchport
+   switchport trunk allowed vlan 100-199
+   switchport mode trunk
+   mlag 5
 ```
 
 ## Loopback Interfaces
@@ -458,7 +471,7 @@ interface Loopback100
 
 | Interface | Description | VRF |  MTU | Shutdown |
 | --------- | ----------- | --- | ---- | -------- |
-| Vlan110 | TEST_01 | PRJ01_APP01 | - | False |
+| Vlan112 | VLAN_VTEP_03_04 | PRJ01_APP01 | - | False |
 | Vlan3009 | MLAG_PEER_L3_iBGP: vrf PRJ01_APP01 | PRJ01_APP01 | 1500 | False |
 | Vlan4093 | MLAG_PEER_L3_PEERING | default | 1500 | False |
 | Vlan4094 | MLAG_PEER | default | 1500 | False |
@@ -467,7 +480,7 @@ interface Loopback100
 
 | Interface | VRF | IP Address | IP Address Virtual | IP Router Virtual Address | VRRP | ACL In | ACL Out |
 | --------- | --- | ---------- | ------------------ | ------------------------- | ---- | ------ | ------- |
-| Vlan110 |  PRJ01_APP01  |  -  |  10.1.10.1/24  |  -  |  -  |  -  |  -  |
+| Vlan112 |  PRJ01_APP01  |  -  |  10.1.10.1/24  |  -  |  -  |  -  |  -  |
 | Vlan3009 |  PRJ01_APP01  |  10.255.251.4/31  |  -  |  -  |  -  |  -  |  -  |
 | Vlan4093 |  default  |  10.255.251.4/31  |  -  |  -  |  -  |  -  |  -  |
 | Vlan4094 |  default  |  10.255.252.4/31  |  -  |  -  |  -  |  -  |  -  |
@@ -476,8 +489,8 @@ interface Loopback100
 
 ```eos
 !
-interface Vlan110
-   description TEST_01
+interface Vlan112
+   description VLAN_VTEP_03_04
    no shutdown
    vrf PRJ01_APP01
    ip address virtual 10.1.10.1/24
@@ -517,7 +530,8 @@ interface Vlan4094
 
 | VLAN | VNI | Flood List | Multicast Group |
 | ---- | --- | ---------- | --------------- |
-| 110 | 10110 | - | - |
+| 110 | 55160 | - | - |
+| 112 | 10112 | - | - |
 
 #### VRF to VNI and Multicast Group Mappings
 
@@ -534,7 +548,8 @@ interface Vxlan1
    vxlan source-interface Loopback1
    vxlan virtual-router encapsulation mac-address mlag-system-id
    vxlan udp-port 4789
-   vxlan vlan 110 vni 10110
+   vxlan vlan 110 vni 55160
+   vxlan vlan 112 vni 10112
    vxlan vrf PRJ01_APP01 vni 10
 ```
 
@@ -672,7 +687,8 @@ ip route 0.0.0.0/0 192.168.0.1
 
 | VLAN | Route-Distinguisher | Both Route-Target | Import Route Target | Export Route-Target | Redistribute |
 | ---- | ------------------- | ----------------- | ------------------- | ------------------- | ------------ |
-| 110 | 192.0.255.5:10110 | 10110:10110 | - | - | learned |
+| 110 | 192.0.255.5:55160 | 55160:55160 | - | - | learned |
+| 112 | 192.0.255.5:10112 | 10112:10112 | - | - | learned |
 
 ### Router BGP VRFs
 
@@ -727,8 +743,13 @@ router bgp 65102
    redistribute connected route-map RM-CONN-2-BGP
    !
    vlan 110
-      rd 192.0.255.5:10110
-      route-target both 10110:10110
+      rd 192.0.255.5:55160
+      route-target both 55160:55160
+      redistribute learned
+   !
+   vlan 112
+      rd 192.0.255.5:10112
+      route-target both 10112:10112
       redistribute learned
    !
    address-family evpn

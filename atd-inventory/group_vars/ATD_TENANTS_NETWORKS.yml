@@ -24,16 +24,21 @@ tenants:
           loopback: 100
           loopback_ip_range: 10.255.1.0/24
         svis:
-          110:
-            name: TEST_01
-            tags: [compute]
+          111:
+            name: VLAN_VTEP_01_02
+            tags: [rack01]
             enabled: true
             ip_address_virtual: 10.1.10.1/24
-    # l2vlans:
-    #   160:
-    #     vni_override: 55160
-    #     # name: Tenant_A_VMOTION
-    #     tags: [vmotion]
+          112:
+            name: VLAN_VTEP_03_04
+            tags: [rack02]
+            enabled: true
+            ip_address_virtual: 10.1.10.1/24
+    l2vlans:
+      110:
+        vni_override: 55160
+        name: L2VLAN_FABRIC
+        tags: [compute]
   # Tenant_B:
   #   mac_vrf_vni_base: 20000
   #   vrfs:

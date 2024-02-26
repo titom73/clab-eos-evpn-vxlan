@@ -67,9 +67,10 @@ l3leaf:
         tenants: # default=['all']
           - all
         tags: # default=['all']
+          - rack01
           - compute
-        always_include_vrfs_in_tenants:
-          - PRJ01_APP01
+        # always_include_vrfs_in_tenants:
+        #   - PRJ01_APP01
       nodes:
         leaf1:
           id: 1
@@ -86,6 +87,7 @@ l3leaf:
           - all
         tags: # default=['all']
           - compute
+          - rack02
       nodes:
         leaf3:
           id: 3

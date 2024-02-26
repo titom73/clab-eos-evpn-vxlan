@@ -82,12 +82,20 @@ router_bgp:
         10.255.251.4:
           peer_group: MLAG-IPv4-UNDERLAY-PEER
   vlans:
-    110:
+    112:
       tenant: PROJECT01
-      rd: 192.0.255.6:10110
+      rd: 192.0.255.6:10112
       route_targets:
         both:
-        - 10110:10110
+        - 10112:10112
+      redistribute_routes:
+      - learned
+    110:
+      tenant: PROJECT01
+      rd: 192.0.255.6:55160
+      route_targets:
+        both:
+        - 55160:55160
       redistribute_routes:
       - learned
 static_routes:
@@ -160,14 +168,17 @@ vlans:
     name: MLAG_PEER
     trunk_groups:
     - MLAG
-  110:
+  112:
     tenant: PROJECT01
-    name: TEST_01
+    name: VLAN_VTEP_03_04
   3009:
     tenant: PROJECT01
     name: MLAG_iBGP_PRJ01_APP01
     trunk_groups:
     - LEAF_PEER_L3
+  110:
+    tenant: PROJECT01
+    name: L2VLAN_FABRIC
 vlan_interfaces:
   Vlan4093:
     description: MLAG_PEER_L3_PEERING
@@ -180,11 +191,11 @@ vlan_interfaces:
     ip_address: 10.255.252.5/31
     no_autostate: true
     mtu: 1500
-  Vlan110:
+  Vlan112:
     tenant: PROJECT01
     tags:
-    - compute
-    description: TEST_01
+    - rack02
+    description: VLAN_VTEP_03_04
     shutdown: false
     ip_address_virtual: 10.1.10.1/24
     vrf: PRJ01_APP01
@@ -211,8 +222,15 @@ port_channel_interfaces:
     type: switched
     shutdown: false
     mode: trunk
-    vlans: '110'
+    vlans: 100-199
     mlag: 4
+  Port-Channel5:
+    description: host4_PortChanne1
+    type: switched
+    shutdown: false
+    mode: trunk
+    vlans: 100-199
+    mlag: 5
 ethernet_interfaces:
   Ethernet1:
     peer: leaf3
@@ -244,27 +262,27 @@ ethernet_interfaces:
     ip_address: 172.31.255.15/31
   Ethernet4:
     peer: host2
-    peer_interface: Eth3
+    peer_interface: Eth2
     peer_type: server
-    description: host2_Eth3
+    description: host2_Eth2
     type: switched
     shutdown: false
     mode: trunk
-    vlans: '110'
+    vlans: 100-199
     channel_group:
       id: 4
       mode: active
   Ethernet5:
-    peer: host2
-    peer_interface: Eth4
+    peer: host4
+    peer_interface: Eth2
     peer_type: server
-    description: host2_Eth4
+    description: host4_Eth2
     type: switched
     shutdown: false
     mode: trunk
-    vlans: '110'
+    vlans: 100-199
     channel_group:
-      id: 4
+      id: 5
       mode: active
 mlag_configuration:
   domain_id: pod2
@@ -324,8 +342,10 @@ vxlan_interface:
       source_interface: Loopback1
       virtual_router_encapsulation_mac_address: mlag-system-id
       vlans:
+        112:
+          vni: 10112
         110:
-          vni: 10110
+          vni: 55160
       vrfs:
         PRJ01_APP01:
           vni: 10
